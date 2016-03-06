@@ -14,7 +14,9 @@ Meteor.methods({
      * throws error if room is full, pin is invalid, name is taken
      */
     join_room: function(name, pin) {
-        return false;
+        var result = joinRoom(name, pin);
+        if(result.err) throw result.err;
+        else return true;
     },
 
     check_room: function (pin) {
