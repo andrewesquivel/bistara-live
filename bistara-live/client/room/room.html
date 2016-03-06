@@ -1,18 +1,42 @@
 <template name="room">
-  {{>stream}}
-  {{>board}}
-  {{>chat}}
+    <div class="room-container">
+        <div class="left-panel">
+            <div class="stream-container">
+                <div class="spacer"></div>
+                <div class="stream">{{>stream}}</div>
+            </div>
+            <div class="chat-container">{{>chat}}</div>
+        </div>
+        <div class="right-panel">
+            <div class="stream" hidden></div>
+            <div class="board">{{>board}}</div>
+        </div>
+    </div>
 </template>
+
+
 
 <template name="stream">
-  stream
-</template>
-
-<template name="board">
-  board
+    stream goes here!
 </template>
 
 <template name="chat">
-  chat
+    <div class="inbound-message-container">
+
+        {{each inboundMessageList}}
+            <div class="inbound-message">
+                <div class="name">{{this.name}}</div>
+                <div class="text" style="color:{{this.color}}">{{this.text}}</div>
+            </div>
+        {{/each}}
+
+    </div>
+    <div class="outbound-message-container">
+        <input class="outbound-message"/>
+        <div class="send-message-button">Send</div>
+    </div>
 </template>
 
+<template name="board">
+    board goes here!
+</template>
