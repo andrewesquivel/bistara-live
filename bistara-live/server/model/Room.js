@@ -30,7 +30,9 @@ createRoom  = function () {
     while(Rooms.find({PIN:pin}).fetch().length > 0)
         pin = generatePIN();
     if(debug) console.log("created pin: " + pin);
-    var doc = {PIN:pin, people:[], board:"", chat:""};  //TODO board and chat
+    var chatId = createChat();
+    if(debug) console.log("chat: " + chatId);
+    var doc = {PIN:pin, people:[], board:"", chat:chatId};  //TODO board and chat
     if(debug) console.log(doc);
     var roomId = Rooms.insert(doc);
     if(debug) console.log("roomId : " + roomId);

@@ -45,14 +45,45 @@ Meteor.methods({
 
     /**
      *
-     * @param peoplIds - array of strings
+     * @param pin - String length 4
      * @returns an array of people objects that match peopleIds
      * @throws err if could not find people
      */
-    get_people: function(peoplIds){
-        var people = People.find({_id:peoplIds}).fetch();
-        if(people) return people;
-        else throw {err: "could not find people"};
+    get_people: function(pin){
+        var room = Rooms.findOne({PIN:pin});
+        if(room){
+            var people = People.find({_id:room.people}).fetch();
+            if(people) return people;
+            else throw {err: "could not find people"};
+        } else throw {err: "could not find room"};
+    },
+
+    /**
+     *
+     * @param pin
+     * @returns the chat asociated with the room that the pin corresponds to
+     */
+    get_chat: function(pin){
+        var room = Rooms.findOne({PIN:pin});
+        if(room){
+            var chat = Chats.find({_id:room.chat}).fetch();
+            if(chat) return chat;
+            else throw {err: "could not find chat"};
+        } else throw {err: "could not find room"};
+    },
+
+    /**
+     *
+     * @param pin
+     * @param name
+     * @param text
+     * @return the updated chat
+     */
+    add_comment: function(pin, name, text){
+        var room = Rooms.findOne({PIN:pin});
+        if(room){
+            return addCommentToChat(room.chat,name,text);
+        } else throw {err: "could not find room"};
     }
 
 });
