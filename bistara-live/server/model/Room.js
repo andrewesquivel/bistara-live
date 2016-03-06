@@ -27,6 +27,7 @@ Rooms.attachSchema(roomSchema);
 
 createRoom  = function () {
     var pin = generatePIN();
+    console.log(pin);
     while(Rooms.find({PIN:pin}).fetch().length > 0)
         pin = generatePIN();
     if(debug) console.log("created pin: " + pin);
@@ -43,7 +44,6 @@ createRoom  = function () {
 var generatePIN = function () {
     return Math.random().toString(36).substring(2,6);
 };
-
 
 /**
  * checks if name is already beings used in room
