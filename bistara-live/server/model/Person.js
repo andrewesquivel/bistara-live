@@ -9,7 +9,8 @@ personSchema = new SimpleSchema({
         type:String
     },
     stream:{
-        type:String
+        type:String,
+        defaultValue:''
     },
     color:{
         type:[Number],
