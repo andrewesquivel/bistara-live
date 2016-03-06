@@ -13,8 +13,8 @@ commentSchema = new SimpleSchema({
     },
     color:{
         type:[Number],
-        min:3,
-        max:3,
+        minCount:3,
+        maxCount:3,
         defaultValue:[0,0,0]
     }
 });
