@@ -27,7 +27,7 @@ if (Meteor.isClient) {
       }
       // If it does, route us to that room
       if (res){
-        Router.go('room/' + pin)
+        Router.go('/room/' + pin)
       }
       // If not, alert the user
       else {
