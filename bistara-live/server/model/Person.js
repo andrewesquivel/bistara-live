@@ -16,6 +16,9 @@ personSchema = new SimpleSchema({
         type:[Number],
         minCount:3,
         maxCount:3
+    },
+    token:{
+        type:String
     }
 });
 

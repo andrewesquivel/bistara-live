@@ -21,7 +21,8 @@ roomSchema = new SimpleSchema({
         defaultValue:''
     },
     session:{
-        type:String
+        type:String,
+        defaultValue:''
     }
 });
 
@@ -39,6 +40,7 @@ createRoom  = function () {
     var doc = {PIN:pin, people:[], board:"", chat:chatId, session:""};  //TODO board and chat
     if(debug) console.log(doc);
     var roomId = Rooms.insert(doc);
+    var sessionId = createSession(roomId);
     if(debug) console.log("roomId : " + roomId);
     if(roomId) return {PIN:pin};
     else return {err:'failed to insert room'};
@@ -48,9 +50,21 @@ var generatePIN = function () {
     return Math.random().toString(36).substring(2,6);
 };
 
+/**
+ *
+ * @param roomId
+ * @returns sessionId
+ */
+var createSession = function(roomId){
+    var openTokClient= new OpenTokClient(API_KEY, API_SECRET);
+    var options = {
+        mediaMode: 'relayed' ,//Options are 'routed' (through openTok servers) and 'relayed' (Peer to Peer)
+        location: '127.0.0.1' //An IP address that the OpenTok servers will use to situate the session in the global OpenTok network.
+    };
 
-var createSession = function(){
-    
+    var sessionId = openTokClient.createSession(options);
+    if(debug) console.log("sessionId:" + sessionId);
+    return sessionId;
 };
 
 /**
@@ -80,13 +94,28 @@ joinRoom = function (name, pin) {
  *
  */
 var addPersonToRoom = function(name,roomId){
-    var doc  = {name: name, stream:"", color:[0,0,0]};
+    var room = Rooms.findOne({_id:roomId});
+    var token = createToken(room.stream);
+    var doc  = {name: name, stream:"", color:[0,0,0], token:token};
+
     var personID = People.insert(doc);
     if(personID){
         var result = Rooms.update(roomId, {$push:{people:personID}});
         if(result) return {id:personID}; //TODO there should be a better way so signal success
         else return {err:'failed to add person to room'};
     }else return {err:'failed t0 create person'};
+};
+
+var createToken = function(sessionId){
+    var options = {
+        role: 'publisher', //The role for the token. Each role defines a set of permissions granted to the token
+        data: "userId:42",
+        expireTime: Math.round(new Date().getTime() / 1000) + 86400 // (24 hours) The expiration time for the token, in seconds since the UNIX epoch. The maximum expiration time is 30 days after the creation time. The default expiration time of 24 hours after the token creation time.
+    };
+
+    var token = openTokClient.generateToken(sessionId, options);
+    if(debug) console.log(token);
+    return token;
 };
 
 /**
