@@ -3,5 +3,7 @@
  */
 
 
-debug = false;
+debug = true;
 test = false;
+
+

@@ -23,7 +23,7 @@
 <template name="chat">
     <div class="inbound-message-container">
 
-        {{each inboundMessageList}}
+        {{#each inboundMessageList}}
             <div class="inbound-message">
                 <div class="name">{{this.name}}</div>
                 <div class="text" style="color:{{this.color}}">{{this.text}}</div>

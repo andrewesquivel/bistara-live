@@ -6,6 +6,11 @@ Meteor.methods({
         return "example";
     },
 
+    create_room: function () {
+        var pin = createRoom();
+        console.log(pin);
+    },
+
     /**
      *
      * @param name - string
