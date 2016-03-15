@@ -9,8 +9,13 @@ if (Meteor.isClient) {
     var pin = Router.current().params.pin;
     Session.set('pin', pin);
 
-    // TODO: @drew make a method called "get-chatbox" that takes in the pin
-    Session.set('chatbox', []);
+    Meteor.call('get_chat', pin, function(err,res){
+      if (err){
+        throw err;
+      }
+      console.log(res);
+      Session.set('chatbox', res);
+    })
 
     Meteor.call('get_room', pin, function (err, res) {
       if (err) console.log(err);
@@ -33,7 +38,6 @@ if (Meteor.isClient) {
       if (err){
         throw err;
       }
-      console.log(res);
       $(".inbound-message-container").scrollTop($(".inbound-message-container")[0].scrollHeight);
       $('.outbound-message').val('')
       Session.set('chatbox', res.comments);
@@ -49,7 +53,6 @@ if (Meteor.isClient) {
       }
       if (res) {
         Session.setPersistent('person', res);
-        console.log(Session.get('person'));
         $( ".overlay-container" ).animate({ opacity: 0}, 500, function()  { $(".overlay-container").hide(); });
       }
     })
