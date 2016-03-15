@@ -21,3 +21,4 @@ insecure                # Allow all DB writes from clients (for prototyping)
 aldeed:collection2
 iron:router
 twbs:bootstrap
+u2622:persistent-session

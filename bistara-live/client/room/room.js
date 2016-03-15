@@ -1,10 +1,16 @@
 if (Meteor.isClient) {
 
   Template.room.rendered = function () {
-    Session.set('chatbox', []);
+
+    if (Session.get('person')){
+      $( ".overlay-container" ).animate({ opacity: 0}, 500, function()  { $(".overlay-container").hide(); });
+    };
 
     var pin = Router.current().params.pin;
     Session.set('pin', pin);
+
+    // TODO: @drew make a method called "get-chatbox" that takes in the pin
+    Session.set('chatbox', []);
 
     Meteor.call('get_room', pin, function (err, res) {
       if (err) console.log(err);
@@ -22,12 +28,14 @@ if (Meteor.isClient) {
   $(document).on('click', '.send-message-button', function (e) {
     var message = $('.outbound-message')[0].value;
     var pin = Session.get('pin');
-    var name = Session.get('name');
+    var name = Session.get('person').name;
     Meteor.call('add_comment', pin, name, message, function(err,res){
       if (err){
         throw err;
       }
       console.log(res);
+      $(".inbound-message-container").scrollTop($(".inbound-message-container")[0].scrollHeight);
+      $('.outbound-message').val('')
       Session.set('chatbox', res.comments);
     })
   });
@@ -39,8 +47,10 @@ if (Meteor.isClient) {
       if (err){
         throw err;
       }
-      if (res){
-
+      if (res) {
+        Session.setPersistent('person', res);
+        console.log(Session.get('person'));
+        $( ".overlay-container" ).animate({ opacity: 0}, 500, function()  { $(".overlay-container").hide(); });
       }
     })
   });

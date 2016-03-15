@@ -21,7 +21,8 @@ roomSchema = new SimpleSchema({
         defaultValue:''
     },
     session:{
-        type:String
+        type:String,
+        defaultValue:''
     }
 });
 
