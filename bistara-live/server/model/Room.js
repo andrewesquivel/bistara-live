@@ -19,6 +19,9 @@ roomSchema = new SimpleSchema({
     chat:{
         type:String,
         defaultValue:''
+    },
+    session:{
+        type:String
     }
 });
 
@@ -44,6 +47,9 @@ createRoom  = function () {
 var generatePIN = function () {
     return Math.random().toString(36).substring(2,6);
 };
+
+
+var
 
 /**
  * checks if name is already beings used in room
@@ -76,7 +82,7 @@ var addPersonToRoom = function(name,roomId){
     var personID = People.insert(doc);
     if(personID){
         var result = Rooms.update(roomId, {$push:{people:personID}});
-        if(result) return {}; //TODO there should be a better way so signal success
+        if(result) return {id:personID}; //TODO there should be a better way so signal success
         else return {err:'failed to add person to room'};
     }else return {err:'failed t0 create person'};
 };
