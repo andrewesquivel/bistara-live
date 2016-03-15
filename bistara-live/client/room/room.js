@@ -25,8 +25,13 @@ if (Meteor.isClient) {
         // Don't actually want the chatbox to be the chat object itself
         // but rather the comments (array of name-message tuples) to
         // simplify the HTML.
-        var chat = res[0].comments;
-        Session.set('chatbox', chat);
+        var newChat = res[0].comments;
+
+        var existingChat = Session.get('chatBox');
+
+        if (existingChat.slice(-1).pop() != newChat.slice(-1).pop()) {
+          Session.set('chatbox', newChat);
+        }
       })}, 1500)
   };
 
