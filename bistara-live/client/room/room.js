@@ -25,14 +25,18 @@ if (Meteor.isClient) {
     var name = Session.get('name');
     Meteor.call('add_comment', pin, name, message, function(err,res){
       if (err){
+        $('.outbound-message')[0].value("");
         throw err;
       }
       console.log(res);
       Session.set('chatbox', res.comments);
+
     })
   });
 
   $(document).on('click', '.nametag-form .submit', function (e) {
+    $( ".overlay-container" ).animate({ opacity: 0}, 500, function()  { $(".overlay-container").hide(); });
+
     var name = $('.nametag-form .name')[0].value;
     var pin = Session.get('pin');
     Meteor.call('join_room', name, pin, function(err,res){
@@ -51,7 +55,5 @@ if (Meteor.isClient) {
     }
 
   });
-
-
 
 }
