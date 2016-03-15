@@ -44,7 +44,7 @@ if (Meteor.isClient) {
         $('.outbound-message')[0].value("");
         throw err;
       }
-      $(".inbound-message-container").scrollTop($(".inbound-message-container")[0].scrollHeight);
+      $(".inbound-message-container").scrollTop($(".inbound-message-container")[0].scrollHeight + $(".inbound-message").height());
       $('.outbound-message').val('')
       Session.set('chatbox', res.comments);
 
