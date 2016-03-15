@@ -88,11 +88,14 @@ var addPersonToRoom = function(name,roomId){
  * @returns true if one of the people already has that name, false otherwise
  */
 var isNameTaken = function(peopleIds, name){
-    var people = People.find({_id:peopleIds}).fetch();
+    if(debug) console.log("is name taken: " + peopleIds.length + " " + name);
     var nameTaken = false;
-    people.forEach(function(person){
+    peopleIds.forEach(function(id){
+       var person = People.findOne({_id:id});
+        if(debug) console.log(person);
         if(person.name === name) nameTaken = true;
     });
+
     return nameTaken
 };
 
