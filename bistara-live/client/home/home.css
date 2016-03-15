@@ -21,10 +21,10 @@
     text-align: center;
     color: #aaa;
     border-radius: 3px;
+    font-family: 'Shadows Into Light Two', cursive;
 }
 
 .front-door .note{
-    font-family: 'Shadows Into Light Two', cursive;
     font-size: 1.4em;
 }
 
@@ -43,6 +43,29 @@
     border: solid 1px #707070;
     box-shadow: 0 0 5px 1px #EED800;
 
+}
+
+
+.front-door .pin{
+    outline:none;
+    margin:5px;
+    padding: 5px;
+    background: rgba(255,255,255,0.1);
+    border: solid 1px #fff;
+    box-shadow: inset 1px 1px 2px 0 #707070;
+    transition: box-shadow 0.3s, border 0.3s, background;
+}
+
+
+.front-door .enter{
+    cursor: pointer;
+    padding: 20px 5px;
+    color:white;
+    font-size:1.8em;
+}
+
+.front-door .enter:hover{
+    text-shadow: 1px 1px 10px #EED800;
 }
 
 
