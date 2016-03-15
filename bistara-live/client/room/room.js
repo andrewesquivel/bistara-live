@@ -2,8 +2,10 @@ if (Meteor.isClient) {
 
   Template.room.rendered = function () {
 
-    if (Session.get('person')){
-      $( ".overlay-container" ).animate({ opacity: 0}, 500, function()  { $(".overlay-container").hide(); });
+
+    if (!Session.get('person')){
+      $(".overlay-container").show();
+      $(".")
     };
 
     var pin = Router.current().params.pin;
@@ -35,7 +37,7 @@ if (Meteor.isClient) {
         throw err;
       }
       console.log(res);
-      $(".inbound-message-container").scrollTop($(".inbound-message-container")[0].scrollHeight);
+      $(".inbound-message-container").scrollTop($(".inbound-message-container")[0].scrollHeight + 50);
       $('.outbound-message').val('')
       Session.set('chatbox', res.comments);
 
