@@ -1,11 +1,13 @@
 .left-panel{
     width:40%;
+    min-width: 200px;
     float: left;
 }
 
 .right-panel{
     display: inline-block;
     width: 60%;
+    min-width: 300px;
     height: 800px;
     background-color: greenyellow;
     float: left;
@@ -45,19 +47,35 @@
 .chat-container{
     height:400px;
     background-color: grey;
+    position: relative;
+    padding: 5px;
 }
 
 .inbound-message-container{
-    padding: 5px;
+
 }
 
 .inbound-message{
     background-color: #ddd;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
 }
 
-.inbound-message .name{
+.inbound-message .name {
     font-weight: bold;
-    float: left;
+    color: #444;
+}
+
+.inbound-message .text{
+    display:inline-block;
+}
+
+.outbound-message{
+    width: 80%;
+}
+
+.outbound-message-container .send-message-button{
+    width:20%;
 }
 
 

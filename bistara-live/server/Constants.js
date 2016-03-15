@@ -5,3 +5,4 @@
 
 debug = false;
 test = false;
+createRoom();

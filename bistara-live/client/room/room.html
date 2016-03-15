@@ -22,6 +22,14 @@
 
 <template name="chat">
     <div class="inbound-message-container">
+        <div class="inbound-message">
+            <div class="name">Harry Rein</div>
+            <div class="text">Hello World!</div>
+        </div>
+        <div class="inbound-message">
+            <div class="name">Harry Wang</div>
+            <div class="text">Hello Harry!</div>
+        </div>
         {{#each inboundMessageList}}
             <div class="inbound-message">
                 <div class="name">{{this.name}}</div>
