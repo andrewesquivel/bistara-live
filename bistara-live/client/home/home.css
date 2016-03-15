@@ -10,10 +10,9 @@
     width: 100%;
     height: 100vh;
 }
-
 .front-door{
     width: 60%;
-    margin: 40% 20%;
+    margin: 30vh 20%;
     padding: 10%;
     background-color: black;
     opacity: 0.85;
@@ -42,7 +41,6 @@
 .front-door .pin.focus{
     border: solid 1px #707070;
     box-shadow: 0 0 5px 1px #EED800;
-
 }
 
 
