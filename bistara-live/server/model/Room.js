@@ -37,10 +37,11 @@ createRoom  = function () {
     if(debug) console.log("created pin: " + pin);
     var chatId = createChat();
     if(debug) console.log("chat: " + chatId);
-    var doc = {PIN:pin, people:[], board:"", chat:chatId, session:""};  //TODO board and chat
+    var sessionId = createSession(roomId);
+    if(debug) console.log("session: " + sessionId);
+    var doc = {PIN:pin, people:[], board:"", chat:chatId, session:sessionId};  //TODO board and chat
     if(debug) console.log(doc);
     var roomId = Rooms.insert(doc);
-    var sessionId = createSession(roomId);
     if(debug) console.log("roomId : " + roomId);
     if(roomId) return {PIN:pin};
     else return {err:'failed to insert room'};
@@ -95,7 +96,7 @@ joinRoom = function (name, pin) {
  */
 var addPersonToRoom = function(name,roomId){
     var room = Rooms.findOne({_id:roomId});
-    var token = createToken(room.stream);
+    var token = createToken(room.session, name);
     var doc  = {name: name, stream:"", color:[0,0,0], token:token};
 
     var personID = People.insert(doc);
@@ -106,15 +107,17 @@ var addPersonToRoom = function(name,roomId){
     }else return {err:'failed t0 create person'};
 };
 
-var createToken = function(sessionId){
+var createToken = function(sessionId, name){
+    if(debug) console.log("create token: " + sessionId + "  " + name);
+    var openTokClient= new OpenTokClient(API_KEY, API_SECRET);
     var options = {
         role: 'publisher', //The role for the token. Each role defines a set of permissions granted to the token
-        data: "userId:42",
+        data: "username=" + name,
         expireTime: Math.round(new Date().getTime() / 1000) + 86400 // (24 hours) The expiration time for the token, in seconds since the UNIX epoch. The maximum expiration time is 30 days after the creation time. The default expiration time of 24 hours after the token creation time.
     };
 
     var token = openTokClient.generateToken(sessionId, options);
-    if(debug) console.log(token);
+    if(debug) console.log("token:" + token);
     return token;
 };
 

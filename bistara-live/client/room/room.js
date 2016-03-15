@@ -1,11 +1,13 @@
 if (Meteor.isClient) {
 
   Template.room.rendered = function () {
+    initSession();
+  };
 
-
+  var initSession = function () {
     if (!Session.get('person')){
       $(".overlay-container").show();
-    };
+    }
 
     var pin = Router.current().params.pin;
     Session.set('pin', pin);
@@ -17,13 +19,35 @@ if (Meteor.isClient) {
       if (err) console.log(err);
       else{
         Session.set('room', res);
+        addOpenTok();
       }
     });
-
   };
 
-  Template.stream.rendered = function () {
-    var sessionId = "";
+  var addOpenTok = function(){
+    var sessionId = Session.get('room').session;
+    var token = Session.get('person').token;
+    var apiKey = '45529562';
+    console.log("sessionId: " + sessionId);
+    console.log("token: " + token);
+    var session = OT.initSession(apiKey, sessionId);
+    var publisher = OT.initPublisher('publisherContainer');
+
+    session.connect(token, function (err) {
+      console.log("session connect");
+      if(err) console.log(err);
+      else{
+        session.publish(publisher, function (error) {
+          console.log("session publish");
+          if (error) {
+            console.log(error);
+          } else {
+            console.log('Publishing a stream.');
+          }
+        });
+      }
+    })
+
   };
 
   $(document).on('click', '.send-message-button', function (e) {
