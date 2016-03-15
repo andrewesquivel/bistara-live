@@ -2,7 +2,6 @@ if (Meteor.isClient) {
 
   Template.room.rendered = function () {
 
-
     if (!Session.get('person')){
       $(".overlay-container").show();
     };
@@ -70,7 +69,6 @@ if (Meteor.isClient) {
 
   Template.chat.helpers({
     inboundMessageList: function () {
-      var chat = Session.get('chatbox');
       return Session.get('chatbox');
     }
 

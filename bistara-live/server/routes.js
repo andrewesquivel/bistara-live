@@ -8,7 +8,6 @@ Meteor.methods({
 
     create_room: function () {
         var pin = createRoom();
-        console.log(pin);
         return pin;
     },
 
