@@ -1,3 +1,9 @@
+/****************************************************
+*****************************************************
+******************  General Functionality  ***********
+*****************************************************
+*****************************************************/
+
 .room-container{
     min-width: 900px;
 }
@@ -16,7 +22,7 @@
 }
 /****************************************************
 *****************************************************
-******************  Stream Functionality  ***********
+******************  Nametag Functionality  ***********
 *****************************************************
 *****************************************************/
 .overlay-container{
@@ -26,6 +32,7 @@
     background-color: rgba(0,0,0,0.9);
     z-index: 2;
     text-align: center;
+    display: none;
 }
 
 .overlay-container .nametag-form{
@@ -35,6 +42,8 @@
     color: #ddd;
     background-color: rgba(255,255,255,0.2);
     box-shadow: 0px 0px 10px rgba(255,255,255,0.5);
+    font-family: 'Cinzel', serif;
+    padding-top: 15px;
 }
 
 .nametag-form .name{
@@ -56,12 +65,14 @@
 
 .nametag-form .submit{
     cursor: pointer;
-    padding: 20px 5px;
+    padding: 10px 5px;
     color:white;
     font-size:1.8em;
 }
 
-
+.nametag-form .submit:hover{
+    text-shadow: 1px 1px 10px #EED800;
+}
 
 /****************************************************
 *****************************************************
@@ -120,6 +131,7 @@
 .inbound-message .text{
     display:inline-block;
 }
+
 
 .outbound-message-container{
     position: absolute;

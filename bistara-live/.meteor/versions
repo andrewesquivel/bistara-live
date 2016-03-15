@@ -3,6 +3,7 @@ aldeed:collection2-core@1.1.0
 aldeed:schema-deny@1.0.1
 aldeed:schema-index@1.0.1
 aldeed:simple-schema@1.5.3
+amplify@1.0.0
 autopublish@1.0.4
 autoupdate@1.2.4
 babel-compiler@5.8.24_1
@@ -76,6 +77,7 @@ templating@1.1.5
 templating-tools@1.0.0
 tracker@1.0.9
 twbs:bootstrap@3.3.6
+u2622:persistent-session@0.4.4
 ui@1.0.8
 underscore@1.0.4
 url@1.0.5
