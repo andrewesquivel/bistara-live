@@ -5,7 +5,6 @@ if (Meteor.isClient) {
 
     if (!Session.get('person')){
       $(".overlay-container").show();
-      $(".")
     };
 
     var pin = Router.current().params.pin;
