@@ -19,6 +19,10 @@ roomSchema = new SimpleSchema({
     chat:{
         type:String,
         defaultValue:''
+    },
+    session:{
+        type:String,
+        defaultValue:''
     }
 });
 
@@ -33,7 +37,7 @@ createRoom  = function () {
     if(debug) console.log("created pin: " + pin);
     var chatId = createChat();
     if(debug) console.log("chat: " + chatId);
-    var doc = {PIN:pin, people:[], board:"", chat:chatId};  //TODO board and chat
+    var doc = {PIN:pin, people:[], board:"", chat:chatId, session:""};  //TODO board and chat
     if(debug) console.log(doc);
     var roomId = Rooms.insert(doc);
     if(debug) console.log("roomId : " + roomId);
@@ -43,6 +47,11 @@ createRoom  = function () {
 
 var generatePIN = function () {
     return Math.random().toString(36).substring(2,6);
+};
+
+
+var createSession = function(){
+    
 };
 
 /**
@@ -76,7 +85,7 @@ var addPersonToRoom = function(name,roomId){
     var personID = People.insert(doc);
     if(personID){
         var result = Rooms.update(roomId, {$push:{people:personID}});
-        if(result) return {}; //TODO there should be a better way so signal success
+        if(result) return {id:personID}; //TODO there should be a better way so signal success
         else return {err:'failed to add person to room'};
     }else return {err:'failed t0 create person'};
 };

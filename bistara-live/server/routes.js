@@ -21,7 +21,10 @@ Meteor.methods({
     join_room: function(name, pin) {
         var result = joinRoom(name, pin);
         if(result.err) throw result.err;
-        else return true;
+        else{
+            var personId = result.id;
+            return People.findOne({_id:personId});
+        }
     },
 
     /**
