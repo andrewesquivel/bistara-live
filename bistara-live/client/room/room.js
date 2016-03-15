@@ -2,8 +2,10 @@ if (Meteor.isClient) {
 
   Template.room.rendered = function () {
 
-    if (Session.get('person')){
-      $( ".overlay-container" ).animate({ opacity: 0}, 500, function()  { $(".overlay-container").hide(); });
+
+    if (!Session.get('person')){
+      $(".overlay-container").show();
+      $(".")
     };
 
     var pin = Router.current().params.pin;
@@ -13,8 +15,13 @@ if (Meteor.isClient) {
       if (err){
         throw err;
       }
-      console.log(res);
-      Session.set('chatbox', res);
+
+      // Don't actually want the chatbox to be the chat object itself
+      // but rather the comments (array of name-message tuples) to
+      // simplify the HTML.
+      var chat = res[0].comments;
+      Session.set('chatbox', chat);
+      
     })
 
     Meteor.call('get_room', pin, function (err, res) {
@@ -36,15 +43,19 @@ if (Meteor.isClient) {
     var name = Session.get('person').name;
     Meteor.call('add_comment', pin, name, message, function(err,res){
       if (err){
+        $('.outbound-message')[0].value("");
         throw err;
       }
       $(".inbound-message-container").scrollTop($(".inbound-message-container")[0].scrollHeight);
       $('.outbound-message').val('')
       Session.set('chatbox', res.comments);
+
     })
   });
 
   $(document).on('click', '.nametag-form .submit', function (e) {
+    $( ".overlay-container" ).animate({ opacity: 0}, 500, function()  { $(".overlay-container").hide(); });
+
     var name = $('.nametag-form .name')[0].value;
     var pin = Session.get('pin');
     Meteor.call('join_room', name, pin, function(err,res){
@@ -60,11 +71,10 @@ if (Meteor.isClient) {
 
   Template.chat.helpers({
     inboundMessageList: function () {
+      var chat = Session.get('chatbox');
       return Session.get('chatbox');
     }
 
   });
-
-
 
 }
