@@ -1,16 +1,18 @@
+.room-container{
+    min-width: 900px;
+}
+
 .left-panel{
     width:40%;
-    min-width: 200px;
     float: left;
 }
 
 .right-panel{
     display: inline-block;
     width: 60%;
-    min-width: 300px;
-    height: 800px;
     background-color: greenyellow;
     float: left;
+    min-height: 700px;
 }
 /****************************************************
 *****************************************************
@@ -18,21 +20,50 @@
 *****************************************************
 *****************************************************/
 .overlay-container{
-
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0,0,0,0.9);
+    z-index: 2;
+    text-align: center;
 }
 
 .overlay-container .nametag-form{
-
+    width: 40%;
+    margin:30vh auto;
+    border: 1px solid white;
+    color: #ddd;
+    background-color: rgba(255,255,255,0.2);
+    box-shadow: 0px 0px 10px rgba(255,255,255,0.5);
 }
 
-.nametag-form .nametag-name{
-
+.nametag-form .name{
+    outline:none;
+    margin:5px;
+    padding: 5px;
+    background: rgba(255,255,255,0.1);
+    border: solid 1px #fff;
+    box-shadow: inset 1px 1px 2px 0 #707070;
+    transition: box-shadow 0.3s, border 0.3s, background;
+    font-family: 'Shadows Into Light Two', cursive;
 }
 
-.nametag-form .nametag-submit{
-    width: 100px;
-    height: 100px;
-    background-color: pink;
+.nametag-form .name:focus,
+.nametag-form .name.focus{
+    border: solid 1px #707070;
+    box-shadow: 0 0 5px 1px #EED800;
+}
+
+.nametag-form .submit{
+    cursor: pointer;
+    padding: 20px 5px;
+    color:white;
+    font-size:1.8em;
+}
+
+
+.nametag-form .submit:hover{
+    text-shadow: 1px 1px 10px #EED800;
 }
 
 
@@ -75,7 +106,8 @@
 }
 
 .inbound-message-container{
-
+    overflow: auto;
+    height: 90%;
 }
 
 .inbound-message{
@@ -93,12 +125,31 @@
     display:inline-block;
 }
 
+.outbound-message-container{
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+}
+
 .outbound-message{
-    width: 80%;
+    width: 70%;
+    display: inline-block;
 }
 
 .outbound-message-container .send-message-button{
-    width:20%;
+    width:25%;
+    float: right;
+    padding: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    text-align:center;
+    background-color: #cccccc;
+    color: #333;
+}
+.outbound-message-container .send-message-button:hover{
+    border: 1px inset solid black;
+    background-color: #aaa;
+    color: black;
 }
 
 
