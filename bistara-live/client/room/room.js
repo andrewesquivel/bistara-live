@@ -13,17 +13,18 @@ if (Meteor.isClient) {
     var pin = Session.get('pin');
     //var name = Session.get('name');
     var name = "steve"
-    Meteor.call('add_message_to_chatbox', pin, name, message, function(err,res){
+    Meteor.call('add_comment', pin, name, message, function(err,res){
       if (err){
         throw err;
       }
+      console.log(res);
       Session.set('chatbox', res);
     })
   });
 
   Template.chat.helpers({
     inboundMessageList: function () {
-      return Session.get('chatbox');
+      return Session.get('chatbox').comments;
     }
 
   });
