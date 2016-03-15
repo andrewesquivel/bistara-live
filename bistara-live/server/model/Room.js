@@ -36,7 +36,7 @@ createRoom  = function () {
     if(debug) console.log("created pin: " + pin);
     var chatId = createChat();
     if(debug) console.log("chat: " + chatId);
-    var doc = {PIN:pin, people:[], board:"", chat:chatId};  //TODO board and chat
+    var doc = {PIN:pin, people:[], board:"", chat:chatId, session:""};  //TODO board and chat
     if(debug) console.log(doc);
     var roomId = Rooms.insert(doc);
     if(debug) console.log("roomId : " + roomId);
@@ -49,7 +49,9 @@ var generatePIN = function () {
 };
 
 
-var
+var createSession = function(){
+    
+};
 
 /**
  * checks if name is already beings used in room
