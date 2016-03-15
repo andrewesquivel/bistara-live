@@ -16,8 +16,8 @@ if (Meteor.isClient) {
   };
 
   Template.stream.rendered = function () {
-    var sessionId = 
-  }
+    var sessionId = "";
+  };
 
   $(document).on('click', '.send-message-button', function (e) {
     var message = $('.outbound-message')[0].value;
