@@ -31,7 +31,7 @@ Chats.attachSchema(chatSchema);
 
 
 createChat = function () {
-    var chatId =  Chat.insert({comments:[]});
+    var chatId =  Chats.insert({comments:[]});
     if(chatId) return chatId;
     throw {err: 'failed to create chat'};
 };
