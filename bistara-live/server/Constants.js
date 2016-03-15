@@ -4,7 +4,7 @@
 
 API_KEY = '45529562';
 API_SECRET = '24ee54a32798cd859b2ba6bcae6a86653583b80f';
-debug = true;
+debug = false;
 test = false;
 
 //createRoom();

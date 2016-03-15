@@ -4,22 +4,40 @@
 *****************************************************
 *****************************************************/
 
+.room-container .background-image {
+    background: url(images/cork.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100vh;
+    z-index: -2;
+}
+
 .room-container{
+    height: 90vh;
     min-width: 900px;
+    padding: 2vh 0px;
 }
 
 .left-panel{
     width:40%;
     float: left;
+    min-height: 700px;
 }
 
 .right-panel{
     display: inline-block;
     width: 60%;
-    background-color: greenyellow;
     float: left;
     min-height: 700px;
+    padding: 0px 0px 0px 10px;
 }
+
 /****************************************************
 *****************************************************
 ******************  Nametag Functionality  ***********
@@ -91,7 +109,8 @@
 }
 
 .stream{
-    background-color: yellow;
+    background-color: whitesmoke;
+    box-shadow: 0px 0px 10px #444;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -107,20 +126,26 @@
 
 .chat-container{
     height:400px;
-    background-color: grey;
+    background-color: #D8D8D8;
+    border: 1px solid #B7B7B7;
     position: relative;
     padding: 5px;
+    box-shadow: 0px 0px 10px #444;
 }
 
 .inbound-message-container{
     overflow: auto;
     height: 90%;
+    border-bottom:1px solid white;
 }
 
 .inbound-message{
     background-color: #ddd;
     padding: 5px;
     border-bottom: 1px solid #ccc;
+}
+.inbound-message:hover{
+    background-color: #d5d5d5;
 }
 
 .inbound-message .name {
@@ -140,19 +165,33 @@
 }
 
 .outbound-message{
-    width: 70%;
+    width: 80%;
     display: inline-block;
+    outline:none;
+    padding: 5px;
+    background: rgba(255,255,255,0.9);
+    border: solid 1px #fff;
+    box-shadow: inset 1px 1px 2px 0 #707070;
+    transition: box-shadow 0.3s, border 0.3s, background;
+}
+
+.outbound-message:focus,
+.outbound-message.focus{
+    border: solid 1px #aaa;
+    box-shadow: 0 0 5px 1px #EED800;
 }
 
 .outbound-message-container .send-message-button{
-    width:25%;
+    width:15%;
     float: right;
     padding: 5px;
     cursor: pointer;
     margin-right: 10px;
     text-align:center;
-    background-color: #cccccc;
+    /*background-color: #cccccc;*/
     color: #333;
+    font-family: 'Cinzel', serif;
+    font-size: 1.2em;
 }
 .outbound-message-container .send-message-button:hover{
     border: 1px inset solid black;
@@ -167,3 +206,10 @@
 *****************************************************
 *****************************************************/
 
+.main-board{
+    width: 100%;
+    height: 90vh;
+    background-color: white;
+    border: 1px solid #444;
+    box-shadow: 0px 0px 10px black;
+}

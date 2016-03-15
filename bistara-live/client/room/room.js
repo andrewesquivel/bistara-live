@@ -5,24 +5,39 @@ if (Meteor.isClient) {
   };
 
   var initSession = function () {
-    if (!Session.get('person')){
+    if (!Session.get('person')) {
       $(".overlay-container").show();
     }
 
     var pin = Router.current().params.pin;
     Session.set('pin', pin);
 
-    // TODO: @drew make a method called "get-chatbox" that takes in the pin
-    Session.set('chatbox', []);
-
     Meteor.call('get_room', pin, function (err, res) {
       if (err) console.log(err);
-      else{
+      else {
         Session.set('room', res);
         addOpenTok();
       }
     });
   };
+
+    Meteor.setInterval(function(){
+      Meteor.call('get_chat', pin, function(err,res) {
+        if (err) {
+          throw err;
+        }
+
+        // Don't actually want the chatbox to be the chat object itself
+        // but rather the comments (array of name-message tuples) to
+        // simplify the HTML.
+        var newChat = res[0].comments;
+
+        var existingChat = Session.get('chatBox');
+
+        if (existingChat.slice(-1).pop() != newChat.slice(-1).pop()) {
+          Session.set('chatbox', newChat);
+        }
+      })}, 1500)
 
   var addOpenTok = function(){
     var sessionId = Session.get('room').session;
@@ -59,8 +74,7 @@ if (Meteor.isClient) {
         $('.outbound-message')[0].value("");
         throw err;
       }
-      console.log(res);
-      $(".inbound-message-container").scrollTop($(".inbound-message-container")[0].scrollHeight + 50);
+      $(".inbound-message-container").scrollTop($(".inbound-message-container")[0].scrollHeight + $(".inbound-message").height());
       $('.outbound-message').val('')
       Session.set('chatbox', res.comments);
 
@@ -78,7 +92,6 @@ if (Meteor.isClient) {
       }
       if (res) {
         Session.setPersistent('person', res);
-        console.log(Session.get('person'));
         $( ".overlay-container" ).animate({ opacity: 0}, 500, function()  { $(".overlay-container").hide(); });
       }
     })

@@ -31,7 +31,6 @@ Rooms.attachSchema(roomSchema);
 
 createRoom  = function () {
     var pin = generatePIN();
-    console.log(pin);
     while(Rooms.find({PIN:pin}).fetch().length > 0)
         pin = generatePIN();
     if(debug) console.log("created pin: " + pin);
