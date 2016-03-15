@@ -9,21 +9,6 @@ if (Meteor.isClient) {
     var pin = Router.current().params.pin;
     Session.set('pin', pin);
 
-    setTimeout(Meteor.call('get_chat', pin, function(err,res){
-      if (err){
-        throw err;
-      }
-
-      // Don't actually want the chatbox to be the chat object itself
-      // but rather the comments (array of name-message tuples) to
-      // simplify the HTML.
-      var chat = res[0].comments;
-      Session.set('chatbox', chat);
-
-    }), 10000);
-
-
-
     Meteor.call('get_room', pin, function (err, res) {
       if (err) console.log(err);
       else{
@@ -31,6 +16,18 @@ if (Meteor.isClient) {
       }
     });
 
+    Meteor.setInterval(function(){
+      Meteor.call('get_chat', pin, function(err,res) {
+        if (err) {
+          throw err;
+        }
+
+        // Don't actually want the chatbox to be the chat object itself
+        // but rather the comments (array of name-message tuples) to
+        // simplify the HTML.
+        var chat = res[0].comments;
+        Session.set('chatbox', chat);
+      })}, 1500)
   };
 
   Template.stream.rendered = function () {
