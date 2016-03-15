@@ -4,7 +4,7 @@
 *****************************************************
 *****************************************************/
 
-.background-image {
+.room-container .background-image {
     background: url(images/cork.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
