@@ -107,7 +107,8 @@
 
 .chat-container{
     height:400px;
-    background-color: grey;
+    background-color: #D8D8D8;
+    border: 1px solid #B7B7B7;
     position: relative;
     padding: 5px;
 }
@@ -115,6 +116,7 @@
 .inbound-message-container{
     overflow: auto;
     height: 90%;
+    border-bottom:1px solid white;
 }
 
 .inbound-message{
@@ -142,6 +144,18 @@
 .outbound-message{
     width: 70%;
     display: inline-block;
+    outline:none;
+    padding: 5px;
+    background: rgba(255,255,255,0.9);
+    border: solid 1px #fff;
+    box-shadow: inset 1px 1px 2px 0 #707070;
+    transition: box-shadow 0.3s, border 0.3s, background;
+}
+
+.outbound-message:focus,
+.outbound-message.focus{
+    border: solid 1px #707070;
+    box-shadow: 0 0 5px 1px #EED800;
 }
 
 .outbound-message-container .send-message-button{
