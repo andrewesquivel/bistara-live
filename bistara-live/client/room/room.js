@@ -11,28 +11,30 @@ if (Meteor.isClient) {
     var pin = Router.current().params.pin;
     Session.set('pin', pin);
 
-
   };
 
-    //Meteor.setInterval(function(){
-    //  var pin = Router.current().params.pin;
-    //  console.log("pin: " + pin);
-    //  Meteor.call('get_chat', pin, function(err,res) {
-    //    if (err) {
-    //      throw err;
-    //    }
-    //
-    //    // Don't actually want the chatbox to be the chat object itself
-    //    // but rather the comments (array of name-message tuples) to
-    //    // simplify the HTML.
-    //    var newChat = res[0].comments;
-    //
-    //    var existingChat = Session.get('chatBox');
-    //
-    //    if (existingChat.slice(-1).pop() != newChat.slice(-1).pop()) {
-    //      Session.set('chatbox', newChat);
-    //    }
-    //  })}, 1500);
+    Meteor.setInterval(function(){
+      var pin = Router.current().params.pin;
+      Meteor.call('get_chat', pin, function(err,res) {
+        if (err) {
+          throw err;
+        }
+
+        // Don't actually want the chatbox to be the chat object itself
+        // but rather the comments (array of name-message tuples) to
+        // simplify the HTML.
+        var newChat = res[0].comments;
+
+        var existingChat = Session.get('chatBox');
+
+        if (!existingChat){
+          Session.set('chatbox', newChat);
+        }
+
+        else if (existingChat.slice(-1).pop() != newChat.slice(-1).pop()) {
+          Session.set('chatbox', newChat);
+        }
+      })}, 1500);
 
   var addOpenTok = function(){
     var sessionId = Session.get('room').session;
