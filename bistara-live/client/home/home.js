@@ -12,6 +12,7 @@ if (Meteor.isClient) {
   });
 
   Template.home.rendered = function(){
+    Session.clearPersistent()
     //Meteor.call('create_room', function(err, result){});
   };
   // Regex check that the string contains characters

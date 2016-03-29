@@ -92,6 +92,10 @@ Meteor.methods({
         if(room){
             return addCommentToChat(room.chat,name,text);
         } else throw {err: "could not find room"};
+    },
+
+    get_token: function(sessionId, name){
+        return createToken(sessionId, name);
     }
 
 });

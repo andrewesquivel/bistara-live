@@ -106,7 +106,7 @@ var addPersonToRoom = function(name,roomId){
     }else return {err:'failed t0 create person'};
 };
 
-var createToken = function(sessionId, name){
+createToken = function(sessionId, name){
     if(debug) console.log("create token: " + sessionId + "  " + name);
     var openTokClient= new OpenTokClient(API_KEY, API_SECRET);
     var options = {
