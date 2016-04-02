@@ -58,6 +58,7 @@ if (Meteor.isClient) {
 
       var session = OT.initSession(apiKey, sessionId);
       console.log(session);
+
       session.on({
         streamCreated: function(event) {
           session.subscribe(event.stream, 'subscriberContainer', {insertMode: 'append'});
