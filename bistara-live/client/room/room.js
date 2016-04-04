@@ -68,7 +68,16 @@ if (Meteor.isClient) {
         console.log("session connect");
         if(err) console.log(err);
         else{
-          var publisher = OT.initPublisher('publisherContainer');
+          // The following options designate the CSS applied to the main publishing video
+          var publisherOptions = {
+            insertMode: 'append',
+            width: '100%',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            height: '40vh',
+          };
+          var publisher = OT.initPublisher('publisherContainer',publisherOptions);
           session.publish(publisher, function (error) {
             console.log("session publish");
             if (error) {
