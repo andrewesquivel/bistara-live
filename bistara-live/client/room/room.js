@@ -5,6 +5,8 @@ if (Meteor.isClient) {
     Session.set('pin', pin);
 
 
+
+
     if(!Session.get('person')){
       $(".overlay-container").show();
     }else{
@@ -43,8 +45,57 @@ if (Meteor.isClient) {
       else {
         Session.set('room', res);
         addOpenTok();
+        addBoard();
       }
     });
+  };
+
+
+  var addBoard = function(){
+      var myCanvas = document.getElementById("main-whiteboard");
+      var ctx = myCanvas.getContext("2d");
+
+      // Fill Window Width and Height - 8.5" by 11" ratio
+      myCanvas.width = '595';
+      myCanvas.height = '770';
+
+      // Set Background Color
+      ctx.fillStyle="#fff";
+      ctx.fillRect(0,0,myCanvas.width,myCanvas.height);
+
+      // Mouse Event Handlers
+      if(myCanvas){
+        var isDown = false;
+        var canvasX, canvasY;
+        ctx.lineWidth = 1;
+
+        $(myCanvas)
+            .mousedown(function(e){
+              isDown = true;
+              ctx.beginPath();
+              canvasX = e.pageX - myCanvas.offsetLeft;
+              canvasY = e.pageY - myCanvas.offsetTop;
+              ctx.moveTo(canvasX, canvasY);
+              console.log(canvasX + " " + canvasY);
+            })
+            .mousemove(function(e){
+              if(isDown !== false) {
+                canvasX = e.pageX - myCanvas.offsetLeft;
+                canvasY = e.pageY - myCanvas.offsetTop;
+                ctx.lineTo(canvasX, canvasY);
+                ctx.strokeStyle = "#000";
+                ctx.stroke();
+              }
+            })
+            .mouseup(function(e){
+              isDown = false;
+              ctx.closePath();
+            });
+      }
+      // Disable Page Move
+      document.body.addEventListener('touchmove',function(evt){
+        evt.preventDefault();
+      },false);
   };
 
   var addOpenTok = function(){
@@ -63,7 +114,16 @@ if (Meteor.isClient) {
       session.connect(token, function (err) {
         if(err) console.log(err);
         else{
-          var publisher = OT.initPublisher('publisherContainer');
+          // The following options designate the CSS applied to the main publishing video
+          var publisherOptions = {
+            insertMode: 'append',
+            width: '100%',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            height: '40vh',
+          };
+          var publisher = OT.initPublisher('publisherContainer',publisherOptions);
           session.publish(publisher, function (error) {
             if (error) {
               console.log(error);
@@ -113,6 +173,32 @@ if (Meteor.isClient) {
       return Session.get('chatbox');
     }
 
+  });
+
+  //***************************************************************************************
+  //******************************Toolbar Functionality ***********************************
+  //***************************************************************************************
+
+  var toolbarHidden = true;
+  $(document).on('click',".main-toolbar>.tab",function(e){
+    console.log("trying to hide the toolbar");
+    var newRightLocation = -1 * $(".main-toolbar").width();
+    if (toolbarHidden){
+      newRightLocation = '0';
+    }
+    $('.main-toolbar').animate({right: newRightLocation},500,function(){
+      toolbarHidden = !toolbarHidden;
+    })
+  })
+
+  $(document).on('click', '#erase-board-button', function (e) {
+    console.log("User is trying to erase the board");
+    var myCanvas = document.getElementById("main-whiteboard");
+    var ctx = myCanvas.getContext("2d");
+
+    // Set Background Color
+    ctx.fillStyle="#fff";
+    ctx.fillRect(0,0,myCanvas.width,myCanvas.height);
   });
 
 }

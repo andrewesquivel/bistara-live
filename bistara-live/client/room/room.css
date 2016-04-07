@@ -45,6 +45,8 @@
 *****************************************************/
 .overlay-container{
     position: absolute;
+    top: 0px;
+    left: 0px;
     height: 100vh;
     width: 100%;
     background-color: rgba(0,0,0,0.9);
@@ -109,13 +111,21 @@
 }
 
 .stream{
-    background-color: whitesmoke;
+    background-color: black;
     box-shadow: 0px 0px 10px #444;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+}
+
+#main-stream{
+    overflow: hidden;
+    position: absolute;
+    top: 2;
+    left: 0;
+    height: 100%;
 }
 
 /****************************************************
@@ -206,10 +216,52 @@
 *****************************************************
 *****************************************************/
 
-.main-board{
+.main-board-container{
     width: 100%;
     height: 90vh;
-    background-color: white;
-    border: 1px solid #444;
+    overflow: hidden;
+}
+
+.main-board-container>canvas {
+    cursor: crosshair;
     box-shadow: 0px 0px 10px black;
+    border: 1px solid #444;
+}
+
+.main-toolbar{
+    width: 200px;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    right: -200px;
+    background-color: #333333;
+    font-family: 'Cinzel', serif;
+}
+
+.main-toolbar .tab{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 0px;
+    left: -50px;
+    border-left: 1px solid #fff;
+    border-bottom: 1px solid #ccc;
+    background-color: #333333;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    font-size: 2.5em;
+}
+
+.main-toolbar .button{
+    width: 100px;
+    height: 50px;
+    margin: 50px;
+    cursor: pointer;
+    color: #fff;
+    text-align: center;
+}
+
+.main-toolbar .button:hover{
+    color:#aaa;
 }
