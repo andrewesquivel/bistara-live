@@ -13,32 +13,31 @@ if (Meteor.isClient) {
 
   };
 
-    //Meteor.setInterval(function(){
-    //  var pin = Router.current().params.pin;
-    //  Meteor.call('get_chat', pin, function(err,res) {
-    //    if (err) {
-    //      throw err;
-    //    }
-    //
-    //    // Don't actually want the chatbox to be the chat object itself
-    //    // but rather the comments (array of name-message tuples) to
-    //    // simplify the HTML.
-    //    var newChat = res[0].comments;
-    //
-    //    var existingChat = Session.get('chatBox');
-    //
-    //    if (!existingChat){
-    //      Session.set('chatbox', newChat);
-    //    }
-    //
-    //    else if (existingChat.slice(-1).pop() != newChat.slice(-1).pop()) {
-    //      Session.set('chatbox', newChat);
-    //    }
-    //  })}, 1500);
+    Meteor.setInterval(function(){
+      var pin = Router.current().params.pin;
+      Meteor.call('get_chat', pin, function(err,res) {
+        if (err) {
+          throw err;
+        }
+
+        // Don't actually want the chatbox to be the chat object itself
+        // but rather the comments (array of name-message tuples) to
+        // simplify the HTML.
+        var newChat = res[0].comments;
+
+        var existingChat = Session.get('chatBox');
+
+        if (!existingChat){
+          Session.set('chatbox', newChat);
+        }
+
+        else if (existingChat.slice(-1).pop() != newChat.slice(-1).pop()) {
+          Session.set('chatbox', newChat);
+        }
+      })}, 1500);
 
 
   var getRoom = function(){
-    console.log('getRoom');
     Meteor.call('get_room', Session.get('pin'), function (err, res) {
       if (err) console.log(err);
       else {
@@ -53,11 +52,8 @@ if (Meteor.isClient) {
     var name = Session.get('person').name;
     Meteor.call('get_token', sessionId, name, function (err, token) {
       var apiKey = '45529562';
-      console.log("sessionId: " + sessionId);
-      console.log("token: " + token);
 
       var session = OT.initSession(apiKey, sessionId);
-      console.log(session);
 
       session.on({
         streamCreated: function(event) {
@@ -65,16 +61,12 @@ if (Meteor.isClient) {
         }
       });
       session.connect(token, function (err) {
-        console.log("session connect");
         if(err) console.log(err);
         else{
           var publisher = OT.initPublisher('publisherContainer');
           session.publish(publisher, function (error) {
-            console.log("session publish");
             if (error) {
               console.log(error);
-            } else {
-              console.log('Publishing a stream.');
             }
           });
         }
