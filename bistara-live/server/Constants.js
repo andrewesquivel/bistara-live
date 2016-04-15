@@ -2,9 +2,9 @@
  * Created by Andrew Esquivel on 3/6/16.
  */
 
-API_KEY = '45529562';
-API_SECRET = '24ee54a32798cd859b2ba6bcae6a86653583b80f';
-debug = false;
+API_KEY = '45562692';
+API_SECRET = 'f10a21b0d75cec634d6a3639599595d3cfd5111d';
+debug = true;
 test = false;
 
 //createRoom();

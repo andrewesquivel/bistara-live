@@ -3,6 +3,7 @@ if (Meteor.isClient) {
   //Secret Knock Solution for creating a room
   window.addEventListener('click', function (evt) {
     if (evt.detail === 3) {
+      console.log("read tripple click");
       Meteor.call("create_room",function(err, result){
         if (result){
           $('.front-door .pin').val(result.PIN);

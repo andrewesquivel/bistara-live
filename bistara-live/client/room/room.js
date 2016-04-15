@@ -13,8 +13,6 @@ if (Meteor.isClient) {
       getRoom();
     }
 
-  };
-
     Meteor.setInterval(function(){
       var pin = Router.current().params.pin;
       Meteor.call('get_chat', pin, function(err,res) {
@@ -37,6 +35,10 @@ if (Meteor.isClient) {
           Session.set('chatbox', newChat);
         }
       })}, 1500);
+
+  };
+
+
 
 
   var getRoom = function(){
@@ -103,7 +105,7 @@ if (Meteor.isClient) {
     var sessionId = Session.get('room').session;
     var name = Session.get('person').name;
     Meteor.call('get_token', sessionId, name, function (err, token) {
-      var apiKey = '45529562';
+      var apiKey = '45562692';
 
       var session = OT.initSession(apiKey, sessionId);
 
