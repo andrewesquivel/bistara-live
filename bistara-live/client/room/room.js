@@ -114,14 +114,22 @@ if (Meteor.isClient) {
       session.connect(token, function (err) {
         if(err) console.log(err);
         else{
-          // The following options designate the CSS applied to the main publishing video
+           //The following options designate the CSS applied to the main publishing video
+          //var publisherOptions = {
+          //  insertMode: 'append',
+          //  width: '100%',
+          //  position: 'absolute',
+          //  top: 0,
+          //  left: 0,
+          //  height: '40vh',
+          //};
           var publisherOptions = {
             insertMode: 'append',
-            width: '100%',
+            width: '0%',
             position: 'absolute',
             top: 0,
             left: 0,
-            height: '40vh',
+            height: '0%',
           };
           var publisher = OT.initPublisher('publisherContainer',publisherOptions);
           session.publish(publisher, function (error) {
