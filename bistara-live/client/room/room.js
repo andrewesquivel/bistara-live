@@ -90,6 +90,7 @@ if (Meteor.isClient) {
             .mouseup(function(e){
               isDown = false;
               ctx.closePath();
+              //TODO: Add here the storage of the canvas state to the backend.
             });
       }
       // Disable Page Move
@@ -142,6 +143,9 @@ if (Meteor.isClient) {
     });
   };
 
+  //***************************************************************************************
+  //****************************** Button Functionality ***********************************
+  //***************************************************************************************
 
   $(document).on('click', '.send-message-button', function (e) {
     var message = $('.outbound-message')[0].value;
