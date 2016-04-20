@@ -18,8 +18,8 @@ if (Meteor.isClient) {
       if (err) console.log(err);
       else {
         Session.set('room', res);
-        addOpenTok();
-        addBoard();
+        addOpenTok(); // global method from stream.js
+        addBoard(); // global method from board.js
       }
     });
   };

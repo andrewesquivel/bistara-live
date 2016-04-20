@@ -96,7 +96,16 @@ Meteor.methods({
 
     get_token: function(sessionId, name){
         return createToken(sessionId, name);
-    }
+    },
 
+
+
+    get_board_state: function (pin) {
+        return getBoardState(pin);
+    },
+
+    set_board_state: function(pin, state){
+        setBoardState(pin, state);
+    }
 });
 

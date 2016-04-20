@@ -3,6 +3,25 @@
  */
 if(Meteor.isClient){
 
+    Template.board.rendered = function(){
+        Meteor.setInterval(function(){
+            var pin = Router.current().params.pin;
+            Meteor.call('get_board_state', pin, function(err,res) {
+                console.log("get board state");
+                if (err) console.log(err);
+                else{
+                    var canvas = document.getElementById("main-whiteboard");
+                    var ctx = canvas.getContext("2d");
+
+                    var image = new Image();
+                    image.onload = function() {
+                        ctx.drawImage(image, 0, 0);
+                    };
+                    image.src = res;
+                }
+            })}, 1500);
+    };
+
     addBoard = function(){
         var myCanvas = document.getElementById("main-whiteboard");
         var ctx = myCanvas.getContext("2d");
@@ -42,6 +61,10 @@ if(Meteor.isClient){
                 .mouseup(function(e){
                     isDown = false;
                     ctx.closePath();
+                    var dataURL = myCanvas.toDataURL();
+                    Meteor.call("set_board_state", Session.get("pin"), dataURL, function(err, result){
+                        if(err) console.log(err);
+                    });
                     //TODO: Add here the storage of the canvas state to the backend.
                 });
         }

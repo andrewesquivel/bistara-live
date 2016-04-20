@@ -33,15 +33,11 @@ createRoom  = function () {
     var pin = generatePIN();
     while(Rooms.find({PIN:pin}).fetch().length > 0)
         pin = generatePIN();
-    if(debug) console.log("created pin: " + pin);
     var chatId = createChat();
-    if(debug) console.log("chat: " + chatId);
     var sessionId = createSession(roomId);
-    if(debug) console.log("session: " + sessionId);
-    var doc = {PIN:pin, people:[], board:"", chat:chatId, session:sessionId};  //TODO board and chat
-    if(debug) console.log(doc);
+    var boardId = createBoard(pin);
+    var doc = {PIN:pin, people:[], board:boardId, chat:chatId, session:sessionId};  //TODO board and chat
     var roomId = Rooms.insert(doc);
-    if(debug) console.log("roomId : " + roomId);
     if(roomId) return {PIN:pin};
     else return {err:'failed to insert room'};
 };
