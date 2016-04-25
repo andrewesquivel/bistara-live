@@ -73,4 +73,46 @@ if(Meteor.isClient){
             evt.preventDefault();
         },false);
     };
+
+    $(document).on('click', '#erase-board-button', function (e) {
+        console.log("User is trying to erase the board");
+        var myCanvas = document.getElementById("main-whiteboard");
+        var ctx = myCanvas.getContext("2d");
+
+        // Set Background Color
+        ctx.fillStyle="#fff";
+        ctx.fillRect(0,0,myCanvas.width,myCanvas.height);
+    });
+
+    $(document).on('input', "#upload-file", function(e){
+        console.log("input");
+        var x = document.getElementById("#upload-file");
+        var canvas = document.getElementById("main-whiteboard");
+        var ctx = canvas.getContext("2d");
+
+        var image = new Image();
+        image.onload = function() {
+            ctx.drawImage(image, 0, 0);
+        };
+        image.src = x.src;
+    });
+
+    Template.board.events({
+        'submit form':function(e){
+            e.preventDefault();
+            console.log("input form");
+            var x = document.getElementById("#upload-file");
+            var canvas = document.getElementById("main-whiteboard");
+            var ctx = canvas.getContext("2d");
+
+            var image = new Image();
+            image.onload = function() {
+                ctx.drawImage(image, 0, 0);
+            };
+            image.src = x.src;
+        }
+    });
+
+
+
 }

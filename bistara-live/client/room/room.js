@@ -63,14 +63,4 @@ if (Meteor.isClient) {
     })
   });
 
-  $(document).on('click', '#erase-board-button', function (e) {
-    console.log("User is trying to erase the board");
-    var myCanvas = document.getElementById("main-whiteboard");
-    var ctx = myCanvas.getContext("2d");
-
-    // Set Background Color
-    ctx.fillStyle="#fff";
-    ctx.fillRect(0,0,myCanvas.width,myCanvas.height);
-  });
-
 }
