@@ -5,8 +5,9 @@
             <div class="tab">?</div>
             <div class="button" id="erase-board-button">Erase Board</div>
             <div class="upload">
+                <p>Right now only .png files and .jpg files work</p>
                 <form enctype='multipart/form-data'>
-                    <input id="upload-file" onchange="alert(this.value); this.value=null; return false;" type='file'>
+                    <input id="upload-file" type='file'>
                     <br>
                     <input type='submit' value='Upload'>
                 </form>
