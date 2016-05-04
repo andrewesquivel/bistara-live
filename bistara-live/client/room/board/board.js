@@ -23,18 +23,23 @@ if(Meteor.isClient){
             var pin = Router.current().params.pin;
             obtainCanvasLock(" interval ");
             Meteor.call('get_board_state', pin, function(err,res) {
-                if (err) console.log(err);
+                if (err) {
+                    console.log(err);
+                    releaseCanvasLock();
+                }
                 else{
                     var canvas = document.getElementById("main-whiteboard");
                     var ctx = canvas.getContext("2d");
 
                     var image = new Image();
+                    image.src = res;
                     image.onload = function() {
                         ctx.drawImage(image, 0, 0);
+                        releaseCanvasLock();
                     };
-                    image.src = res;
+
                 }
-                releaseCanvasLock();
+
             })}, 1500);
     };
 
