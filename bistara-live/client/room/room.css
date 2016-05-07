@@ -260,11 +260,13 @@
     cursor: pointer;
     color: #fff;
     text-align: center;
+    margin: 0px !important;
 }
 
 .main-toolbar .button:hover{
     color:#aaa;
 }
+
 
 /****************************************************
 *****************************************************
