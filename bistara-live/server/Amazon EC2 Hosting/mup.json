@@ -2,7 +2,7 @@
   // Server authentication info
   "servers": [
     {
-      "host": "54.201.207.160",
+      "host": "54.149.235.127",
       "username": "ubuntu",
       // or pem file (ssh based authentication)
       "pem": "/Users/harryrein/Desktop/Viva/Sapien/bistara-live/bistara-live/server/Amazon EC2 Hosting/bistaralive.pem"
@@ -33,8 +33,8 @@
 
   // Configure environment
   "env": {
-    "PORT" : 80,
-    "ROOT_URL" : "http://ec2-54-201-207-160.us-west-2.compute.amazonaws.com"
+    "PORT" : 443,
+    "ROOT_URL" : "http://www.bistaralive.com"
     // "MONGO_URL": "mongodb://bistaralive-database:1337"
   },
 

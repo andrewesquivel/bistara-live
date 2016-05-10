@@ -254,10 +254,10 @@
 }
 
 .main-toolbar .button{
-    width: 100px;
+    width: 200px;
     height: 50px;
-    margin: 50px;
     cursor: pointer;
+    padding-top:20px;
     color: #fff;
     text-align: center;
     margin: 0px !important;
