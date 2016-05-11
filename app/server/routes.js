@@ -7,7 +7,9 @@ Meteor.methods({
     },
 
     create_room: function () {
+        console.log("creating room");
         var pin = createRoom();
+        console.log("room created: " +pin);
         return pin;
     },
 
@@ -109,7 +111,7 @@ Meteor.methods({
     }
 });
 
-JsonRoutes.ErrorMiddleware.use(RestMiddleware.handleErrorAsJson);
+//JsonRoutes.ErrorMiddleware.use(RestMiddleware.handleErrorAsJson);
 JsonRoutes.setResponseHeaders({
     "Cache-Control": "no-store",
     "Pragma": "no-cache",
