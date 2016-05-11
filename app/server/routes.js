@@ -109,7 +109,7 @@ Meteor.methods({
     }
 });
 
-
+JsonRoutes.ErrorMiddleware.use(RestMiddleware.handleErrorAsJson);
 JsonRoutes.setResponseHeaders({
     "Cache-Control": "no-store",
     "Pragma": "no-cache",

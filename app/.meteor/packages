@@ -26,3 +26,4 @@ u2622:persistent-session
 arunoda:streams
 cfs:gridfs
 simple:rest
+simple:json-routes
