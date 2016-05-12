@@ -117,8 +117,7 @@ var options = {
         console.log("------------GET ARGS FROM REQUST------------");
         console.log(request);
        return [];
-    },
-    httpMethod:"POST"
+    }
 };
 
 Meteor.method("create", function(callback){
