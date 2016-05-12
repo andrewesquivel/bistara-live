@@ -3,14 +3,12 @@
         <canvas id="main-whiteboard"> Here is the canvas for the board</canvas>
         <div class="main-toolbar">
             <div class="tab">?</div>
-            <div class="button" id="erase-board-button">Erase Board</div>
-            <div class="upload">
-                <p>Right now only .png files and .jpg files work</p>
-                <form enctype='multipart/form-data'>
-                    <input id="upload-file" type='file'>
-                    <br>
-                    <input type='submit' value='Upload'>
-                </form>
+            <div class="erase button" id="erase-board-button">Erase Board</div>
+            <div class="upload button">
+                <div enctype='multipart/form-data'>
+                    <div class="button" id="upload-file" type='file'> Grab Picture </div>
+                    <div class="button" id="post-file" type='submit' value='Upload'> Post Picture </div>
+                </div>
             </div>
         </div>
     </div>
