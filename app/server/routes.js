@@ -112,7 +112,7 @@ Meteor.methods({
 });
 
 var options = {
-    url: 'create/room',
+    url: 'create',
     getArgsFromRequest: function(request){
         console.log("------------GET ARGS FROM REQUST------------");
         console.log(request);
@@ -121,7 +121,7 @@ var options = {
     httpMethod:"POST"
 };
 
-Meteor.method("create_room_api", function(callback){
+Meteor.method("create", function(callback){
     return createRoom();
 }, options);
 
