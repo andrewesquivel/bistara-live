@@ -111,18 +111,16 @@ Meteor.methods({
     }
 });
 
-var options = {
-    url: 'create',
+Meteor.method("create_room_api", function(callback){
+    return createRoom();
+}, {
+    url: "create_room_api",
     getArgsFromRequest: function(request){
         console.log("------------GET ARGS FROM REQUST------------");
         console.log(request);
-       return [];
+        return [];
     }
-};
-
-Meteor.method("create", function(callback){
-    return createRoom();
-}, options);
+});
 
 //JsonRoutes.ErrorMiddleware.use(RestMiddleware.handleErrorAsJson);
 JsonRoutes.setResponseHeaders({
