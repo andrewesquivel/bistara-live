@@ -125,7 +125,7 @@ Meteor.method("create_room_api", function(callback){
     return createRoom();
 }, options);
 
-JsonRoutes.ErrorMiddleware.use(RestMiddleware.handleErrorAsJson);
+//JsonRoutes.ErrorMiddleware.use(RestMiddleware.handleErrorAsJson);
 JsonRoutes.setResponseHeaders({
     "Cache-Control": "no-store",
     "Pragma": "no-cache",
