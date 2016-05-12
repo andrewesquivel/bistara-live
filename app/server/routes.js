@@ -118,7 +118,8 @@ Meteor.method('create', function(callback){
         console.log("------------GET ARGS FROM REQUST------------");
         console.log(request);
         return [];
-    }
+    },
+    httpMethod: 'GET'
 });
 
 //JsonRoutes.ErrorMiddleware.use(RestMiddleware.handleErrorAsJson);
