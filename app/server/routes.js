@@ -118,7 +118,7 @@ var options = {
         console.log(request);
        return [];
     },
-    httpMethod:"GET"
+    httpMethod:"POST"
 };
 
 Meteor.method("create_room_api", function(callback){
