@@ -111,10 +111,9 @@ Meteor.methods({
     }
 });
 
-Meteor.method("create_room_api", function(callback){
+Meteor.method('create', function(callback){
     return createRoom();
 }, {
-    url: "create_room_api",
     getArgsFromRequest: function(request){
         console.log("------------GET ARGS FROM REQUST------------");
         console.log(request);
