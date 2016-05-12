@@ -111,7 +111,19 @@ Meteor.methods({
     }
 });
 
-//JsonRoutes.ErrorMiddleware.use(RestMiddleware.handleErrorAsJson);
+Meteor.method("create_room_api", function(callback){
+    return createRoom();
+},{
+    url: "create/room",
+    getArgsFromRequest: function(request){
+        console.log(request);
+        return [];
+    },
+    httpMethod: "GET"
+});
+
+
+JsonRoutes.ErrorMiddleware.use(RestMiddleware.handleErrorAsJson);
 JsonRoutes.setResponseHeaders({
     "Cache-Control": "no-store",
     "Pragma": "no-cache",
