@@ -115,8 +115,6 @@ Meteor.method('create', function(callback){
     return createRoom();
 }, {
     getArgsFromRequest: function(request){
-        console.log("------------GET ARGS FROM REQUST------------");
-        console.log(request);
         return [];
     },
     httpMethod: 'GET'
