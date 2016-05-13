@@ -2,8 +2,8 @@
  * Created by Andrew Esquivel on 3/6/16.
  */
 
-API_KEY = '45562692';
-API_SECRET = 'f10a21b0d75cec634d6a3639599595d3cfd5111d';
+API_KEY = '45589542';
+API_SECRET = '25c450819d30e044a8cbbec0b3ed56d922580e3c';
 debug = false;
 test = false;
 

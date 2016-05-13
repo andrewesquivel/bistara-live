@@ -6,7 +6,7 @@ if(Meteor.isClient){
         var sessionId = Session.get('room').session;
         var name = Session.get('person').name;
         Meteor.call('get_token', sessionId, name, function (err, token) {
-            var apiKey = '45562692';
+            var apiKey = '45589542';
 
             var session = OT.initSession(apiKey, sessionId);
 
