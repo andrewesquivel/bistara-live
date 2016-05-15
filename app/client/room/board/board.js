@@ -6,7 +6,7 @@ if(Meteor.isClient){
     var canvasLocked = false;
 
     var obtainCanvasLock = function(from){
-        while(canvasLocked == true){}
+        //while(canvasLocked == true){}
         canvasLocked = true;
     };
 
@@ -105,18 +105,18 @@ if(Meteor.isClient){
         });
     });
 
-    $(document).on('click', "#upload-file", function(e){
-        console.log("input");
-        var x = document.getElementById("upload-file");
-        var canvas = document.getElementById("main-whiteboard");
-        var ctx = canvas.getContext("2d");
-
-        var image = new Image();
-        image.onload = function() {
-            ctx.drawImage(image, 0, 0);
-        };
-        image.src = x.src;
-    });
+    //$(document).on('click', "#upload-file", function(e){
+    //    console.log("input");
+    //    var x = document.getElementById("upload-file");
+    //    var canvas = document.getElementById("main-whiteboard");
+    //    var ctx = canvas.getContext("2d");
+    //
+    //    var image = new Image();
+    //    image.onload = function() {
+    //        ctx.drawImage(image, 0, 0);
+    //    };
+    //    image.src = x.src;
+    //});
 
     var min = function(a,b){
         if(a <= b) return a;
