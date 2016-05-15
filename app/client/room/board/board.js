@@ -2,42 +2,31 @@
  * Created by abe707 on 4/15/16.
  */
 if(Meteor.isClient){
-
-    var canvasLocked = false;
-
-    var obtainCanvasLock = function(from){
-        //while(canvasLocked == true){}
-        canvasLocked = true;
-    };
-
-    var releaseCanvasLock = function(){
-        canvasLocked = false;
-    };
-
-
+    var canvasIsFree = true;
     Template.board.rendered = function(){
         Meteor.setInterval(function(){
             var pin = Router.current().params.pin;
-            obtainCanvasLock(" interval ");
-            Meteor.call('get_board_state', pin, function(err,res) {
-                if (err) {
-                    console.log(err);
-                    releaseCanvasLock();
-                }
-                else{
-                    var canvas = document.getElementById("main-whiteboard");
-                    var ctx = canvas.getContext("2d");
-
-                    var image = new Image();
-                    image.src = res;
-                    image.onload = function() {
-                        ctx.drawImage(image, 0, 0);
+            if(canvasIsFree) {
+                Meteor.call('get_board_state', pin, function (err, res) {
+                    if (err) {
+                        //console.log(err);
                         releaseCanvasLock();
-                    };
+                    }
+                    else {
+                        var canvas = document.getElementById("main-whiteboard");
+                        var ctx = canvas.getContext("2d");
 
-                }
+                        var image = new Image();
+                        image.src = res;
+                        image.onload = function () {
+                            ctx.drawImage(image, 0, 0);
+                        };
 
-            })}, 1500);
+                    }
+
+                });
+            }
+        }, 1500);
     };
 
     addBoard = function(){
@@ -128,7 +117,7 @@ if(Meteor.isClient){
         console.log("input form");
         var file = document.getElementById("upload-file").files[0];
         console.log(file);
-        obtainCanvasLock("file");
+        canvasIsFree = false;
         var canvas = document.getElementById("main-whiteboard");
         var ctx = canvas.getContext("2d");
 
@@ -141,7 +130,7 @@ if(Meteor.isClient){
                 console.log("calling meteor method");
                 Meteor.call("set_board_state", Session.get("pin"), canvas.toDataURL(), function(err, result){
                     if(err) console.log(err);
-                    releaseCanvasLock();
+                    canvasIsFree = true;
                 });
             };
         };
@@ -155,7 +144,7 @@ if(Meteor.isClient){
             console.log("input form");
             var file = document.getElementById("upload-file").files[0];
             console.log(file);
-            obtainCanvasLock("file");
+            canvasIsFree = false;
             var canvas = document.getElementById("main-whiteboard");
             var ctx = canvas.getContext("2d");
 
@@ -168,7 +157,7 @@ if(Meteor.isClient){
                     console.log("calling meteor method");
                     Meteor.call("set_board_state", Session.get("pin"), canvas.toDataURL(), function(err, result){
                         if(err) console.log(err);
-                        releaseCanvasLock();
+                        canvasIsFree = true;
                     });
                 };
             };
