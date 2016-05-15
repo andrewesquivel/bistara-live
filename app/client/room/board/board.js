@@ -6,14 +6,11 @@ if(Meteor.isClient){
     var canvasLocked = false;
 
     var obtainCanvasLock = function(from){
-        console.log("obtain canvas lock " + from );
         while(canvasLocked == true){}
         canvasLocked = true;
-        console.log("lock obtained");
     };
 
     var releaseCanvasLock = function(){
-        console.log("release canvas lock")
         canvasLocked = false;
     };
 
